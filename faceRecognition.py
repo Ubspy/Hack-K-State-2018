@@ -5,6 +5,8 @@ import time
 
 previousFrames = {'one': [], 'two': [], 'three': [], 'four': [], 'five': [], 'six': [], 'seven': [], 'eight': [], 'nine': [], 'ten': []}
 
+profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
+
 def blurArea(frame, x1, y1, x2, y2):
     frame[y1:y2, x2:x1] = cv2.blur(frame[y1:y2, x2:x1], (45, 45))
 
@@ -77,8 +79,3 @@ def processFrame(frame):
         previousFrames['one'].append((x, y, x - width, y + height))
 
     outputFrames.append(frame)
-
-profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
-
-# When exited, it closes the stream
-cv2.destroyAllWindows()
