@@ -1,19 +1,15 @@
 import cv2
 import face_recognition as faceRecognition
 import numpy as np
+import time
 
 # Sets camera object
 camera = cv2.VideoCapture(0)
 
-camera.set(3, 640);
-camera.set(4, 480);
+camera.set(3, 640)
+camera.set(4, 480)
 
-profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
-
-while(True):
-    # Captures video for frame
-    ret, frame = camera.read()
-
+def processFrame(frame):
     grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = faceRecognition.face_locations(grayFrame)
@@ -34,13 +30,37 @@ while(True):
         x = (640 - x)
         cv2.rectangle(frame, (x, y), (x - width, y + height), (0, 255, 0), 2)
 
-    # Display frame
-    cv2.imshow('camera', frame)
+    outputFrames.append(frame)
 
-    # Close key
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
+
+inputFrames = []
+outputFrames = []
+
+timeout = time.time() + 10
+
+while(True):
+    # Captures video for frame
+    ret, frame = camera.read()
+
+    inputFrames.append(frame)
+
+    if time.time() > timeout:
         break
 
-# When exited, it closes the stream
 camera.release()
+currentFrame = 0
+
+for frame in inputFrames:
+    print("{0}/{1}".format(currentFrame, len(inputFrames)))
+    processFrame(frame)
+    currentFrame = currentFrame + 1
+
+video = cv2.VideoWriter('gay.mp4', cv2.VideoWriter_fourcc(*'MP4V'), 20, (640, 480))
+
+for frame in outputFrames:
+    video.write(frame)
+
+# When exited, it closes the stream
 cv2.destroyAllWindows()
+video.release()
