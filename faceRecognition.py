@@ -5,6 +5,9 @@ import numpy as np
 # Sets camera object
 camera = cv2.VideoCapture(0)
 
+camera.set(3, 640);
+camera.set(4, 480);
+
 profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
 
 while(True):
@@ -17,7 +20,7 @@ while(True):
 
     profiles = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5, minSize=(20, 20))
 
-    grayFrame = cv2.flip(grayFrame, 0)
+    grayFrame = cv2.flip(grayFrame, 1)
 
     profilesInv = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5, minSize=(20, 20))
 
@@ -28,7 +31,8 @@ while(True):
         cv2.rectangle(frame, (x, y), (x + width, y + height), (255, 0, 0), 2)
 
     for (x, y, width, height) in profilesInv:
-        cv2.rectangle(frame, (x, y, (x + width, y + height), (255, 0, 0), 2))
+        x = (640 - x)
+        cv2.rectangle(frame, (x, y), (x - width, y + height), (0, 255, 0), 2)
 
     # Display frame
     cv2.imshow('camera', frame)
