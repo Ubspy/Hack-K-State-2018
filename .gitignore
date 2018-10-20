@@ -6,6 +6,11 @@ __pycache__/
 # MP4 Files
 *.mp4
 
+# Pictures
+*.jpg
+*.jpeg
+*.png
+
 # C extensions
 *.so
 
