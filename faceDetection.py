@@ -2,18 +2,14 @@ import cv2
 import face_recognition as faceRecognition
 import numpy as np
 import pickle
-import time
+import sys
 
-camera = cv2.VideoCapture(0)
 data = pickle.loads(open('encodings.xml', "rb").read())
-
-camera.set(3, 640) # set video widht
-camera.set(4, 480) # set video height
 
 previousFrames = {'one': [], 'two': [], 'three': [], 'four': [], 'five': [], 'six': [], 'seven': [], 'eight': [], 'nine': [], 'ten': []}
 faceIdentities = []
 
-profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
+#profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
 
 inputFrames = []
 outputFrames = []
@@ -111,7 +107,7 @@ def processFrame(frame):
 
     faceIdentities = []
     matchFaces(frame, profiles)
-    
+
     outputFrames.append(frame)
     faceIdentities = []
 
@@ -119,7 +115,7 @@ def processFrame(frame):
     for i, (x, y, width, height) in enumerate(profiles):
         if faceIdentities[i] == "Unknown":
             blurArea(frame, x, y, x + width, y + height)
-            previousFrames['one'].append((x, y, x + width, y + height))
+            x+previousFrames['one'].append((x, y, x + width, y + height))
         cv2.rectangle(frame, (x, y), (x + width, y + height), (255, 0, 0), 2)
 
     faceIdentities = []
@@ -133,27 +129,19 @@ def processFrame(frame):
         cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 0, 255), 2)
 '''
 
-timeout = time.time()
+capture = cv2.VideoCapture(sys.argv[1])
 
-while (time.time() - timeout) < 8:
-    # Captures video for frame
-    ret, frame = camera.read()
-
-    inputFrames.append(frame)
-
-camera.release()
-currentFrame = 0
-
-for frame in inputFrames:
+for frame in capture:
     print("{0}/{1}".format(currentFrame, len(inputFrames)))
     processFrame(frame)
     currentFrame = currentFrame + 1
 
-video = cv2.VideoWriter('gay.mp4', cv2.VideoWriter_fourcc(*'MP4V'), 20, (640, 480))
+video = cv2.VideoWriter(sys.arvg[2], cv2.VideoWriter_fourcc(*'MP4V'), 20, (640, 480))
 
 for frame in outputFrames:
     video.write(frame)
 
 # When exited, it closes the stream
 cv2.destroyAllWindows()
+capture.release()
 video.release()
