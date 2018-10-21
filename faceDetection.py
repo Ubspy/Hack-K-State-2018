@@ -89,10 +89,10 @@ def matchFaces(frame, faces):
 def processFrame(frame):
     grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = faceRecognition.face_locations(grayFrame)
-    profiles = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5)
+    #profiles = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5)
 
-    grayFrame = cv2.flip(grayFrame, 1)
-    profilesInv = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5)
+    #grayFrame = cv2.flip(grayFrame, 1)
+    #profilesInv = profileCascade.detectMultiScale(grayFrame, scaleFactor=1.2, minNeighbors=5)
 
     ghostBlur()
     swapFrameObjects()
@@ -106,10 +106,9 @@ def processFrame(frame):
         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
     faceIdentities = []
-    matchFaces(frame, profiles)
+    #matchFaces(frame, profiles)
 
     outputFrames.append(frame)
-    faceIdentities = []
 
 '''
     for i, (x, y, width, height) in enumerate(profiles):
@@ -131,12 +130,21 @@ def processFrame(frame):
 
 capture = cv2.VideoCapture(sys.argv[1])
 
-for frame in capture:
+while(capture.isOpened()):
+    ret, frame = capture.read()
+    if ret:
+        inputFrames.append(frame)
+    else:
+        break
+
+currentFrame = 1
+
+for frame in inputFrames:
     print("{0}/{1}".format(currentFrame, len(inputFrames)))
     processFrame(frame)
     currentFrame = currentFrame + 1
 
-video = cv2.VideoWriter(sys.arvg[2], cv2.VideoWriter_fourcc(*'MP4V'), 20, (640, 480))
+video = cv2.VideoWriter(sys.argv[2], cv2.VideoWriter_fourcc(*'MP4V'), 20, (640, 480))
 
 for frame in outputFrames:
     video.write(frame)
