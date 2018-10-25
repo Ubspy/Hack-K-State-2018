@@ -7,9 +7,11 @@ import pickle
 # Gets local path
 dirPath = os.path.dirname(os.path.realpath(__file__))
 
+# TODO: Get these files from the right spot
 # Gets path for faces
 facePath = os.path.join(os.path.join(os.getcwd(), 'trainer'), 'faces')
 # Gets face files
+# TODO: Get these files from the right spot
 faceImagePaths = [os.path.join(facePath, f) for f in os.listdir(facePath)]
 
 profilePath = os.path.join(os.path.join(os.getcwd(), 'trainer'), 'profiles')
@@ -62,6 +64,7 @@ for profileImage in profileImagePaths:
 
 faceData = {'encodings': knownEncodings, 'names': knownNames}
 
+# TODO: Get this file from the right spot
 f = open("encodings.xml", "wb")
 f.write(pickle.dumps(faceData))
 f.close()

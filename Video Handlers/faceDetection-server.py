@@ -5,6 +5,7 @@ import pickle
 import sys
 import math
 
+# TODO: Get this file from the right spot
 data = pickle.loads(open('/home/ubuntu/encodings.xml', "rb").read())
 
 previousFrames = {'one': [], 'two': [], 'three': [], 'four': [], 'five': [], 'six': [], 'seven': [], 'eight': [], 'nine': [], 'ten': []}
