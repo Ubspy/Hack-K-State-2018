@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Record</title>
+	<link rel="stylesheet" media="screen" href="css/style2.css">
+</head>
+	<body>
+		<div id="container">
+   		 <video autoplay="true" id="videoElement">
+     
+   		 </video>
+		</div>
+		<script src="index.js"></script>
+		<script type="text/javascript">
+			var video = document.querySelector("#videoElement");
+ 
+if (navigator.mediaDevices.getUserMedia) {       
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    video.srcObject = stream;
+  })
+  .catch(function(err0r) {
+    console.log("Something went wrong!");
+  });
+}
+		</script>
+	</body>
+</html>

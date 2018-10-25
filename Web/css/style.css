@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+*{
+  margin: 0;
+  z-index: 2;
+}
+html{
+  width:100%;
+  height:100%;
+}
+
+body{
+  font-family: 'Ubuntu', sans-serif;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(132deg, #581845, #C70039, #FF5733,#581845);
+  background-size: 400% 400%;
+  animation: BackgroundGradient 30s ease infinite;
+}
+div {
+  display: block;
+}
+#particles-js canvas{    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1 !important;
+
+}
+
+#particles-js{
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+#big-box {
+  position: absolute;
+  width:70%;
+  height:75%;
+  margin: 6.25% 15%;
+  background-color: rgba(255,255,255,.6);
+  box-shadow: 0 4px 40px 1px rgba(0,0,0,.5);
+  }
+    
+#big-box h1{
+  margin-top:40px;
+  text-align: center;      
+  font-family: 'Roboto Mono', monospace;
+  font-size: 40px; 
+}
+    
+#big-box h2{
+  margin:auto;
+  margin-top: 25px;
+  width: 80%;
+  font-size: 20px;
+  text-align: center;  
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+}
+    
+#record {
+  border-width: 0;
+  color: #fff;
+  background-color: #555;
+  outline:none;
+  width: 200px;
+  height: 75px;  
+  font-size:20px;
+}
+    
+#record:hover{
+  transition: 1s;
+  background-color:#000;
+  color:#fff;
+  cursor: pointer;
+}
+
+
+@keyframes BackgroundGradient
+{
+  0%
+  {
+    background position: 0% 50%;
+  }
+  50%
+  {
+    background-position: 100% 50%;
+  }
+  100%
+  {
+    background-position: 0% 50%;
+  }
+}
+#record:active{
+  border-width: 1px;
+  border-color:#443636;
+}
+
+#upload:hover{
+  transition: 1s;
+  background:#000;
+  color:#fff;
+  cursor: pointer;
+  }
+#upload:active{
+  border-width: 1px;
+  border-color:#443636;
+}
+
+#upload {
+  border-width: 0;
+  float:right;
+  background-color:#555;
+  color:#fff;
+  outline:none;
+  width: 200px;
+  height:75px;
+  font-size:20px;
+}
+    
+#small-box{
+  margin-top: 10%;
+  margin-left:15%;
+  margin-right: 10%;
+  width:90%;
+}
+
+#up {
+  margin:auto 25%;
+  height: 100%;
+  width:30%;
+}
+
