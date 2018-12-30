@@ -4,6 +4,8 @@ import numpy as np
 import os
 import pickle
 
+# Unreferenced everywhere else, not enough time to integrate into site, adds face identities
+
 # Gets local path
 dirPath = os.path.dirname(os.path.realpath(__file__))
 
@@ -17,6 +19,7 @@ faceImagePaths = [os.path.join(facePath, f) for f in os.listdir(facePath)]
 profilePath = os.path.join(os.path.join(os.getcwd(), 'trainer'), 'profiles')
 profileImagePaths = [os.path.join(profilePath, f) for f in os.listdir(profilePath)]
 
+# Uses haar cascade to get faces
 profileCascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
 
 knownNames = []
@@ -24,6 +27,9 @@ knownEncodings = []
 
 num = 1
 
+# Loops through faces and profiles and adds encodings
+# reason it's seperated into face and profiles and flipped profiles is because originally the program was to use haar cascades not a custom alg
+# TODO: clean up using custom face detection algorithm
 for faceImage in faceImagePaths:
     print("{}/{}".format(num, len(faceImagePaths) + len(profileImagePaths)))
     num += 1

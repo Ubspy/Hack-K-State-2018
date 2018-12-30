@@ -9,6 +9,7 @@ import sys
 process = psutil.Process(os.getpid())
 
 
+
 VIDEO_TO_TEST = sys.argv[1]
 VIDEO_OUTPUT = sys.argv[2]
 
@@ -63,7 +64,7 @@ def blurFrame(frame,alprInstance):
 
 	# Cycle through the plates and derive a location, only if there is a plate in the frame
 	if len(plates["results"]) > 0:
-		
+
 		# Initialize plate_coords
 		plate_coords = []
 
