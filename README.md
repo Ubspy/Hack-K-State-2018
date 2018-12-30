@@ -1,5 +1,5 @@
 # Aut0Blur
-This project was created for the 2018 K-State Hackathon. This is the original, archived version of the code made at the hackathon.
+This project was created for the 2018 K-State Hackathon. This is the NOT original code, to see the archived code [click here](https://github.com/Ubspy/Hack-K-State-2018/tree/archive/hackathon-archive).
 
 # What does it do?
 Given a video file, it will blur out unrecognized faces and license plates.
